@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--把天气界面的每个部分布局文件引入-->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="top.wukezhi.personalmanagement.Fragment.Ffour">
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:id="@+id/four_bing_pic_img"
+        />
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/four_swipe_refresh">
+        <ScrollView
+            android:id="@+id/four_weather_layout"
+            android:scrollbars="none"
+            android:overScrollMode="never"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:fitsSystemWindows="true"
+                android:layout_height="wrap_content">
+                <include layout="@layout/now"/>
+                <include layout="@layout/forecast"/>
+                <include layout="@layout/aqi"/>
+                <include layout="@layout/suggestion"/>
+            </LinearLayout>
+        </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
+</FrameLayout>

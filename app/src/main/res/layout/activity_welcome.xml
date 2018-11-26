@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/welcome_drawer_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".WelcomeActivity">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include layout="@layout/welcome_title" />
+        <!--内容-->
+        <android.support.v4.view.ViewPager
+            android:background="#ffff"
+            android:layout_gravity="center"
+            android:id="@+id/welcome_viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="8"
+            />
+        <!--底部导航-->
+        <android.support.design.widget.BottomNavigationView
+            android:id="@+id/welcome_bottom_nav_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="bottom"
+            android:background="?attr/colorPrimary"
+            app:itemIconTint="@drawable/selector_bnv"
+            app:itemTextColor="@drawable/selector_bnv"
+            app:menu="@menu/bottombar_menu" />
+    </LinearLayout>
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        app:menu="@menu/nav_menu"
+        app:headerLayout="@layout/nav_header"
+        />
+
+</android.support.v4.widget.DrawerLayout>
