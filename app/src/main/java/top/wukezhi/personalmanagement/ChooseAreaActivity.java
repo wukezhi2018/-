@@ -77,8 +77,6 @@ public class ChooseAreaActivity extends AppCompatActivity {
                     intent.putExtra("data_return",weatherId);
                     setResult(RESULT_OK,intent);
                     finish();
-
-
                 }
             }
         });

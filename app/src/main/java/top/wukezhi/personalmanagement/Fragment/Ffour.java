@@ -66,7 +66,9 @@ public class Ffour extends Fragment {
         carWashText = (TextView) getActivity().findViewById(R.id.car_wash_text);
         sportText = (TextView) getActivity().findViewById(R.id.sport_text);
         swipeRefresh = (SwipeRefreshLayout) getActivity().findViewById(R.id.four_swipe_refresh);
-        swipeRefresh.setColorSchemeResources(R.color.colorPrimary);//设置下刷颜色
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary,
+                R.color.colorAccent,
+                R.color.bottomfive);//设置下刷颜色变化
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         //获取shared对象，应用程序包名为前缀

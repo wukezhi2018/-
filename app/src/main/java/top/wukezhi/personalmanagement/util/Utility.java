@@ -1,13 +1,20 @@
 package top.wukezhi.personalmanagement.util;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
+import java.util.List;
+
+import top.wukezhi.personalmanagement.Gson_joke.Joke_json;
 import top.wukezhi.personalmanagement.Gson_weather.Weather;
 import top.wukezhi.personalmanagement.db.City;
 import top.wukezhi.personalmanagement.db.County;
@@ -86,6 +93,19 @@ public class Utility {
             JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
             String weatherContent = jsonArray.getJSONObject(0).toString();
             return new Gson().fromJson(weatherContent, Weather.class);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //解析出joke类数组
+    public static List<Joke_json.ResultBean> handleJokeResponse(String response) {
+        try {
+            Gson gson=new Gson();
+            JSONObject jsonObject=new JSONObject(response);
+            JSONArray jsonArray=jsonObject.getJSONArray("result");
+            String joke=jsonArray.toString();
+            return new Gson().fromJson(joke,new TypeToken<List<Joke_json.ResultBean>>(){}.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }

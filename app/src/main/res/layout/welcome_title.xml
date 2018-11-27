@@ -16,11 +16,11 @@
         android:background="@drawable/ic_home" />
 
     <TextView
-        android:id="@+id/welcome_title"
+        android:id="@+id/welcome_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="个人管理"
+        android:text="自应用"
         android:textColor="#fff"
         android:textSize="20sp" />
 

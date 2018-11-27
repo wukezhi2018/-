@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--卡片式布局：
+圆角弧度：app:cardCornerRadius="10dp"
+-->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="25dp"
+    app:cardElevation="15sp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <!--指定图片的缩放方式，centerCrop保持原有比例填满imageview，
+        并将超过的部分剪裁android:scaleType="centerCrop"-->
+        <ImageView
+            android:id="@+id/joke_image"
+            android:scaleType="centerCrop"
+            android:layout_width="match_parent"
+            android:layout_height="100dp" />
+        <TextView
+            android:id="@+id/joke_name"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="5dp"
+            android:textSize="16sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
+</android.support.v7.widget.CardView>

@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -45,6 +46,8 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button welcome_title_list;//右上角图标按钮
     private String list_weather;//城市代码
     private Ffour ffour;//天气碎片
+    private Ftwo ftwo;
+    private TextView welcome_title;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,6 +63,7 @@ public class WelcomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_welcome);
         date();//获得传递的数据
         Bmob.initialize(this,appkey);
+        welcome_title=(TextView)findViewById(R.id.welcome_top); //标题
         welcome_title_add=(Button)findViewById(R.id.welcome_title_add);
         welcome_title_list=(Button)findViewById(R.id.welcome_title_list);//选择城市
         welcome_title_list.setOnClickListener(new View.OnClickListener() {
@@ -85,25 +89,33 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()){
-                    case R.id.pin_drop:drawerLayout.closeDrawers();break;
+                    case R.id.pin_drop:
+                        //百度定位
+                        Intent intent_pin_drop=new Intent(
+                                WelcomeActivity.this,LbsActivity.class);
+                        startActivity(intent_pin_drop);
+                        drawerLayout.closeDrawers();
+                        break;
                     case R.id.lock:
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.exit_app:
                         //退出app
-                        Intent intent1=new Intent(WelcomeActivity.this,MainActivity.class);
-                        intent1.putExtra(MainActivity.EXIT_APP, true);
-                        startActivity(intent1);
+                        Intent intent_exit_app=new Intent(WelcomeActivity.this,MainActivity.class);
+                        intent_exit_app.putExtra(MainActivity.EXIT_APP, true);
+                        startActivity(intent_exit_app);
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.help:
+                        //显示联系方式
                         Toast.makeText(WelcomeActivity.this,"请联系qq1012364741",Toast.LENGTH_LONG).show();
                         drawerLayout.closeDrawers();
                         break;
                     case R.id.exit:
-                        BmobUser.logOut();//清空缓存
-                        Intent intent=new Intent(WelcomeActivity.this,MainActivity.class);
-                        startActivity(intent);
+                        //清空缓存
+                        BmobUser.logOut();
+                        Intent intent_exit=new Intent(WelcomeActivity.this,MainActivity.class);
+                        startActivity(intent_exit);
                         drawerLayout.closeDrawers();
                         break;
                 }
@@ -121,9 +133,10 @@ public class WelcomeActivity extends AppCompatActivity {
         //设置适配
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
         //添加碎片
+        ftwo=new Ftwo();//获取笑话实例
         ffour=new Ffour();//获取天气实例
         viewPagerAdapter.addFragment(new Fone());
-        viewPagerAdapter.addFragment(new Ftwo());
+        viewPagerAdapter.addFragment(ftwo);
         viewPagerAdapter.addFragment(new Fthree());
         viewPagerAdapter.addFragment(ffour);
         //为内容添加适配器
@@ -139,6 +152,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 //当第一项被选择时FOne显示，以此类推
                 switch (itemId) {
                     case R.id.bb_menu_write:
+                        welcome_title.setText("记录");
                         bottomNavigationView.setBackgroundResource(R.color.bottomone);//底部导航颜色
                         relativeLayout.setBackgroundResource(R.color.bottomone);
                         relativeLayout1.setBackgroundResource(R.color.bottomone);
@@ -147,6 +161,8 @@ public class WelcomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(0);
                         break;
                     case R.id.bb_menu_joke:
+                        welcome_title.setText("笑话");
+                        ftwo.changeBG(R.color.bottomtwo);
                         bottomNavigationView.setBackgroundResource(R.color.bottomtwo);
                         relativeLayout.setBackgroundResource(R.color.bottomtwo);
                         relativeLayout1.setBackgroundResource(R.color.bottomtwo);
@@ -155,6 +171,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(1);
                         break;
                     case R.id.bb_menu_new:
+                        welcome_title.setText("新闻");
                         bottomNavigationView.setBackgroundResource(R.color.bottomthree);
                         relativeLayout.setBackgroundResource(R.color.bottomthree);
                         relativeLayout1.setBackgroundResource(R.color.bottomthree);
@@ -163,6 +180,7 @@ public class WelcomeActivity extends AppCompatActivity {
                         viewPager.setCurrentItem(2);
                         break;
                     case R.id.bb_menu_weather:
+                        welcome_title.setText("天气");
                         bottomNavigationView.setBackgroundResource(R.color.bottomfour);
                         relativeLayout.setBackgroundResource(R.color.bottomfour);
                         relativeLayout1.setBackgroundResource(R.color.bottomfour);
@@ -198,12 +216,22 @@ public class WelcomeActivity extends AppCompatActivity {
                 switch (bottomNavigationView.getMenu().getItem(position).getItemId())
                 {//显示与隐藏右上角图标
                     case R.id.bb_menu_write:
+                        welcome_title.setText("记录");
                         welcome_title_add.setVisibility(View.VISIBLE);
                         welcome_title_list.setVisibility(View.GONE);
                         break;
-                    case R.id.bb_menu_joke:welcome_title_add.setVisibility(View.GONE);welcome_title_list.setVisibility(View.GONE);break;
-                    case R.id.bb_menu_new:welcome_title_add.setVisibility(View.GONE);welcome_title_list.setVisibility(View.GONE);break;
+                    case R.id.bb_menu_joke:
+                        welcome_title.setText("笑话");
+                        welcome_title_add.setVisibility(View.GONE);
+                        welcome_title_list.setVisibility(View.GONE);
+                        break;
+                    case R.id.bb_menu_new:
+                        welcome_title.setText("新闻");
+                        welcome_title_add.setVisibility(View.GONE);
+                        welcome_title_list.setVisibility(View.GONE);
+                        break;
                     case R.id.bb_menu_weather:
+                        welcome_title.setText("天气");
                         welcome_title_add.setVisibility(View.GONE);
                         welcome_title_list.setVisibility(View.VISIBLE);
                         break;
@@ -218,6 +246,7 @@ public class WelcomeActivity extends AppCompatActivity {
                 SCROLL_STATE_IDLE：空闲状态
                 SCROLL_STATE_DRAGGING：滑动状态
                 SCROLL_STATE_SETTLING：滑动后滑翔的状态*/
+
             }
         });
     }
