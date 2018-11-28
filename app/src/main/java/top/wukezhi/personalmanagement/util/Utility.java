@@ -14,7 +14,9 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import top.wukezhi.personalmanagement.Gson_calendar.FoneCalendar;
 import top.wukezhi.personalmanagement.Gson_joke.Joke_json;
+import top.wukezhi.personalmanagement.Gson_news.News;
 import top.wukezhi.personalmanagement.Gson_weather.Weather;
 import top.wukezhi.personalmanagement.db.City;
 import top.wukezhi.personalmanagement.db.County;
@@ -101,11 +103,34 @@ public class Utility {
     //解析出joke类数组
     public static List<Joke_json.ResultBean> handleJokeResponse(String response) {
         try {
-            Gson gson=new Gson();
             JSONObject jsonObject=new JSONObject(response);
             JSONArray jsonArray=jsonObject.getJSONArray("result");
             String joke=jsonArray.toString();
             return new Gson().fromJson(joke,new TypeToken<List<Joke_json.ResultBean>>(){}.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //解析出news类数组
+    public static List<News.ResultBean.DataBean> handleNewsResponse(String response) {
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONObject jsonObject1=jsonObject.getJSONObject("result");
+            String news=jsonObject1.getJSONArray("data").toString();
+            return new Gson().fromJson(news,new TypeToken<List<News.ResultBean.DataBean>>(){}.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //解析日历
+    public static FoneCalendar.ResultBean.DataBean handleCalendarResponse(String response) {
+        try {
+            JSONObject jsonObject=new JSONObject(response);
+            JSONObject jsonObject1=jsonObject.getJSONObject("result");
+            String calendar=jsonObject1.getJSONObject("data").toString();
+            return new Gson().fromJson(calendar, FoneCalendar.ResultBean.DataBean.class);
         } catch (Exception e) {
             e.printStackTrace();
         }

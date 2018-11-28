@@ -33,10 +33,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.bmob.v3.Bmob;
+import cn.bmob.v3.exception.BmobException;
+import cn.bmob.v3.listener.SaveListener;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
 import top.wukezhi.personalmanagement.util.HttpUtil;
+import top.wukezhi.personalmanagement.util.Person;
+import top.wukezhi.personalmanagement.util.key;
 
 public class LbsActivity extends AppCompatActivity {
     public LocationClient mLocationClient;
@@ -61,7 +66,6 @@ public class LbsActivity extends AppCompatActivity {
         SDKInitializer.initialize(getApplicationContext());
         //初始化sdk，用getApplicationContext（）获取全局context参数，必须在setcontentview之前
         setContentView(R.layout.activity_lbs);
-
         positionText=(TextView)findViewById(R.id.position_text_view);
         lbs_back=(Button)findViewById(R.id.lbs_button);//返回上个活动
         lbs_back.setOnClickListener(new View.OnClickListener() {
@@ -142,12 +146,24 @@ public class LbsActivity extends AppCompatActivity {
                     }else if(location.getLocType()==BDLocation.TypeNetWorkLocation){
                         currentPosition.append("网络");
                     }
-                    positionText.setText(currentPosition);
+                    positionText.setText(currentPosition);//显示地址
+                    setAddress(currentPosition);
                 }
             });
         }
         public void onConnectHotSpotMessage(String s,int i){
         }
+    }
+    public void setAddress(StringBuilder address){
+        Person p2 = new Person();
+        p2.setName(getIntent().getStringExtra("username"));
+        p2.setAddress(address.toString());
+        p2.save(new SaveListener<String>() {
+            @Override
+            public void done(String objectId,BmobException e) {
+
+            }
+        });
     }
     /**
      * 加载必应每日一图

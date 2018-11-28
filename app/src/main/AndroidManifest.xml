@@ -59,7 +59,9 @@
 
         <activity android:name=".ChooseAreaActivity" />
         <activity android:name=".LbsActivity" />
-        <activity android:name=".JokeActivity"></activity>
+        <activity android:name=".JokeActivity" />
+        <activity android:name=".NewsActivity" />
+        <activity android:name=".LockActivity"></activity>
     </application>
 
 </manifest>

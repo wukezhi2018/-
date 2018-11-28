@@ -3,7 +3,7 @@
     <item
         android:id="@+id/bb_menu_write"
         android:icon="@drawable/write"
-        android:title="记录" />
+        android:title="日历" />
         <item
         android:id="@+id/bb_menu_joke"
         android:icon="@drawable/joke"

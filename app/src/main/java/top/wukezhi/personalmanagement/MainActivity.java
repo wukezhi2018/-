@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
         }
         setContentView(R.layout.activity_main);
         Bmob.initialize(MainActivity.this,appkey);
+        //判断缓存
         BmobUser bmobUser=BmobUser.getCurrentUser();
         if(bmobUser!=null){
             Intent intent=new Intent(MainActivity.this,WelcomeActivity.class);

@@ -14,7 +14,7 @@
         <include layout="@layout/welcome_title" />
         <!--内容-->
         <android.support.v4.view.ViewPager
-            android:background="#ffff"
+            android:background="@drawable/background_gradient"
             android:layout_gravity="center"
             android:id="@+id/welcome_viewpager"
             android:layout_width="match_parent"
@@ -28,12 +28,13 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:layout_gravity="bottom"
-            android:background="?attr/colorPrimary"
+            android:background="@drawable/background_gradient"
             app:itemIconTint="@drawable/selector_bnv"
             app:itemTextColor="@drawable/selector_bnv"
             app:menu="@menu/bottombar_menu" />
     </LinearLayout>
     <android.support.design.widget.NavigationView
+        android:background="@drawable/background_gradient"
         android:id="@+id/nav_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
